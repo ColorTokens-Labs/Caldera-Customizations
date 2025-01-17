@@ -7,7 +7,7 @@
   executors:
   - name: psh
     platform: windows
-    command: '.\psexec.exe \\#{remote.host.fqdn} C:\Users\Public\nssm.exe install
+    command: '.\psexec.exe \\#{remote.host.fqdn} -accepteula -nobanner C:\Users\Public\nssm.exe install
       sandsvc "C:\Users\Public\s4ndc4t.exe" "-server #{server} -v -originLinkID #{origin_link_id}";
 
       sc.exe \\#{remote.host.fqdn} start sandsvc;
