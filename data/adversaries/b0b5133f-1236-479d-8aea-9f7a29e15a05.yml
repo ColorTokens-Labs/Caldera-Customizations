@@ -1,0 +1,9 @@
+name: Xshield Ransomware Demo (Windows)
+description: 'Demonstrates ransomware propagation using SMB for lateral movement'
+atomic_ordering:
+- deeac480-5c2a-42b5-90bb-41675ee53c7e
+- 65048ec1-f7ca-49d3-9410-10813e472b30
+- 95727b87-175c-4a69-8c7a-a5d82746a753
+- 71bf6e50-9273-4fea-9dda-4df421556aab
+adversary_id: b0b5133f-1236-479d-8aea-9f7a29e15a05
+objective: 495a9828-cab1-44dd-a0ca-66e58177d8cc

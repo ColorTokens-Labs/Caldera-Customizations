@@ -1,0 +1,91 @@
+- tactic: impact
+  technique_name: Data Encrypted for Impact
+  technique_id: T1486
+  name: Akira Ransomware
+  description: 'Dropping 100 files with random content and .akira File Extension and
+    the Akira Ransomnote to c:\
+
+    '
+  executors:
+  - name: psh
+    platform: windows
+    command: "1..100 | ForEach-Object { $out = new-object byte[] 1073741; (new-object\
+      \ Random).NextBytes($out); [IO.File]::WriteAllBytes(\"c:\\file.$_.akira\", $out)\
+      \ }; echo \"Hi friends\" >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt;\
+      \ echo \"\" >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt; echo \"\
+      Whatever who you are and what your title is if you' re reading this it means\
+      \ the internal infrastructure of your company is fully or partially dead, all\
+      \ your backups - virtual, physical - everything that we managed to reach - are\
+      \ completely removed. Moreover, we have taken a great amount of your corporate\
+      \ data prior to encryption  Well, for now let's keep all the tears and resentment\
+      \ to ourselves and try to build a constructive dialogue. We're fully aware of\
+      \ what damage we caused by locking your internal sources. At the moment. you\
+      \ have to know: \" >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt; echo\
+      \ \"1. Dealing with us you will save A LOT due to we are not interested in ruining\
+      \ your financially. We will study in depth your finance, bank income statements,\
+      \ your savings, investments etc. and present our reasonable demand to you. If\
+      \ you have an active cyber insurance, let us know and we will guide you how\
+      \ to properly use it. Also, dragging out the negotiation process will lead to\
+      \ failing of a deal\" >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt;\
+      \ echo \"2. Paying us you save your TIME, MONEY, EFFORTS and be back on track\
+      \ within 24 hours approximately. Our decryptor works properly on any files or\
+      \ systems, so you will be able to check it by requesting a test decryption service\
+      \ from the beginning of our conversation. [f you decide to recover on your own,\
+      \ keep in mind that you can permanently lose access to some files or accidently\
+      \ corrupt them \u2014 in this case we won't be able to help.  \" >> C:\\Users\\\
+      Administrator\\Desktop\\akira_readme.txt; echo \"3. The security report or the\
+      \ exclusive first-hand information that you will receive upon reaching an agreement\
+      \ is of a great value, since NO full audit of your network will show you the\
+      \ vulnerabilities that we' ve managed to detect and used in order to get into.\
+      \ identify backup solutions and upload your data.\" >> C:\\Users\\Administrator\\\
+      Desktop\\akira_readme.txt; echo \"4. As for your data, if we fail to agree,\
+      \ we will try to sell personal information/trade secrets/databases/source codes\
+      \ \u2014 generally speaking, everything that has a value on the darkmarket -\
+      \ to multiple threat actors at ones.\" >> C:\\Users\\Administrator\\Desktop\\\
+      akira_readme.txt; echo \"Then all of this will be published in our blog -\"\
+      \ >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt; echo \"\" >> C:\\\
+      Users\\Administrator\\Desktop\\akira_readme.txt; echo \"https://akira.onion\"\
+      \ >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt; echo \"\" >> C:\\\
+      Users\\Administrator\\Desktop\\akira_readme.txt; echo \"5. We're more than negotiable\
+      \ and will definitely find the way to settle this quickly and reach an agreement\
+      \ which will satisfy both of us\" >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt;\
+      \ echo \"\" >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt; echo \"\
+      If you' re indeed interested in our assistance and the services we provide you\
+      \ can reach out to us following simple instructions:\" >> C:\\Users\\Administrator\\\
+      Desktop\\akira_readme.txt; echo \"\" >> C:\\Users\\Administrator\\Desktop\\\
+      akira_readme.txt; echo \"1. Install TOR Browser to get access to our chat room\
+      \ - https://www.torproject.org/download/.\" >> C:\\Users\\Administrator\\Desktop\\\
+      akira_readme.txt; echo \"2. Paste this link \u2014 https://akira.onion\" >>\
+      \ C:\\Users\\Administrator\\Desktop\\akira_readme.txt; echo \"3. Use this code\
+      \ - - to log into our chat.\" >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt;\
+      \ echo \"\" >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt; echo \"\
+      Keep in mind that the faster you will get in touch, the less damage we cause\"\
+      \ >> C:\\Users\\Administrator\\Desktop\\akira_readme.txt"
+    code: null
+    language: null
+    build_target: null
+    payloads: []
+    uploads: []
+    timeout: 60
+    parsers:
+    - module: plugins.atomic.app.parsers.atomic_powershell
+      parserconfigs:
+      - source: validate_me
+        edge: ''
+        target: ''
+        custom_parser_vals: {}
+    cleanup:
+    - del C:\Users\Administrator\Desktop\akira_readme.txt ; del c:\file.*.akira
+    variations: []
+    additional_info: {}
+  requirements: []
+  privilege: ''
+  repeatable: false
+  buckets:
+  - impact
+  additional_info: {}
+  access: {}
+  singleton: false
+  plugin: atomic
+  delete_payload: true
+  id: 71bf6e50-9273-4fea-9dda-4df421556aab

